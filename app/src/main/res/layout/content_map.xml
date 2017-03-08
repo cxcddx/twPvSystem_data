@@ -14,172 +14,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <Button
-                    android:id="@+id/marker_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="获取marker" />
-
-                <TextView
-                    android:id="@+id/mark_listenter_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="拖动marker1" />
-            </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/flayout_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.amap.api.maps2d.MapView
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="320dp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|right"
-                    android:background="#D999"
-                    android:orientation="vertical"
-                    android:padding="5dp"
-                    android:visibility="gone">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <Button
-                            android:id="@+id/clearMap"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:text="Clear" />
-
-                        <Button
-                            android:id="@+id/resetMap"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:text="Reset" />
-                    </LinearLayout>
-
-                    <RadioGroup
-                        android:id="@+id/custom_info_window_options"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/default_info_window"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="default_info_window" />
-
-                        <RadioButton
-                            android:id="@+id/custom_info_contents"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="custom_info_contents" />
-
-                        <RadioButton
-                            android:id="@+id/custom_info_window"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="custom_info_window" />
-                    </RadioGroup>
-                </LinearLayout>
-            </FrameLayout>
+                android:id="@+id/fragment_map"></FrameLayout>
 
             <!--累计发电量等-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@color/red"
-                android:orientation="horizontal"></LinearLayout>
-
-
-            <!--&lt;!&ndash;选择年月日按钮&ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:id="@+id/ll_tabs"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_marginLeft="80dp"-->
-                <!--android:layout_marginRight="80dp"-->
-                <!--&gt;-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/btn_one"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="One"-->
-                    <!--android:background="#009eff"-->
-                    <!--android:textColor="#fff"-->
-                    <!--/>-->
-                <!--<Button-->
-                    <!--android:id="@+id/btn_two"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="Two"-->
-                    <!--android:background="#009eff"-->
-                    <!--android:textColor="#fff"-->
-                    <!--/>-->
-                <!--<Button-->
-                    <!--android:id="@+id/btn_three"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="Three"-->
-                    <!--android:background="#009eff"-->
-                    <!--android:textColor="#fff"-->
-                    <!--/>-->
-                <!--<Button-->
-                    <!--android:id="@+id/btn_four"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="Four"-->
-                    <!--android:background="#009eff"-->
-                    <!--android:textColor="#fff"-->
-                    <!--android:visibility="gone"-->
-                    <!--/>-->
-
-            <!--</LinearLayout>-->
-
-
-            <!--&lt;!&ndash;累计发电量列表&ndash;&gt;-->
-            <!--<FrameLayout-->
-                <!--android:id="@+id/flayout_chart"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="300dp"-->
-                <!--android:background="@color/colorPrimary">-->
-            <!--</FrameLayout>-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
                 <fragment
-                    android:name="twpvsystem.tongwei.com.twpvsystem.fragment.ChartMainFragment"
+                    android:name="twpvsystem.tongwei.com.twpvsystem.fragment.ElecFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/fragment_chart"/>
+                    android:id="@+id/fragment_elec"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">=
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fragment_chart"></FrameLayout>
             </LinearLayout>
 
             <!--节能减排等内容-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/colorAccent"></LinearLayout>
+                android:background="@color/colorAccent">
+                <fragment
+                    android:name="twpvsystem.tongwei.com.twpvsystem.fragment.EnergyFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fragment_energy"/>
+            </LinearLayout>
 
         </LinearLayout>
 

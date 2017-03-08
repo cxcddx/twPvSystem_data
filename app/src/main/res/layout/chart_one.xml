@@ -4,16 +4,13 @@
     android:layout_height="match_parent"
     android:background="#009e00"
     android:orientation="vertical" >
-    
 
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textColor="#fff"
-        />
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+    </lecho.lib.hellocharts.view.LineChartView>
     
 </LinearLayout>

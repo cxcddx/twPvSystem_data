@@ -15,15 +15,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btn_one,btn_two,btn_three;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-////        setSupportActionBar(toolbar);
-//
-//        init();
-//    }
-
     public void baseLoadView() {
         btn_one = (Button) this.findViewById(R.id.btn_one);
         btn_two = (Button) this.findViewById(R.id.btn_two);

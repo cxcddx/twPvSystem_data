@@ -10,67 +10,54 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="One"
             android:background="#009eff"
-            android:textColor="#fff"
-            />
+            android:text="One"
+            android:textColor="#fff" />
+
         <Button
             android:id="@+id/btn_two"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Two"
             android:background="#009eff"
-            android:textColor="#fff"
-            />
+            android:text="Two"
+            android:textColor="#fff" />
+
         <Button
             android:id="@+id/btn_three"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Three"
             android:background="#009eff"
-            android:textColor="#fff"
-            />
+            android:text="Three"
+            android:textColor="#fff" />
+
         <Button
             android:id="@+id/btn_four"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Four"
             android:background="#009eff"
+            android:text="Four"
             android:textColor="#fff"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
     </LinearLayout>
-
-
-    <!--&lt;!&ndash;累计发电量列表&ndash;&gt;-->
-    <!--<FrameLayout-->
-        <!--android:id="@+id/flayout_chart"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:background="@color/colorPrimary">-->
-    <!--</FrameLayout>-->
 
     <!--累计发电量列表-->
     <!-- VIewPager 主要是加载内容的 -->
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_marginBottom="300dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="300dp" />
 
 </LinearLayout>
