@@ -17,12 +17,15 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import okhttp3.Call;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import twpvsystem.tongwei.com.twpvsystem.R;
-import twpvsystem.tongwei.com.twpvsystem.bean.User;
 import twpvsystem.tongwei.com.twpvsystem.util.EventbusUtil;
+import twpvsystem.tongwei.com.twpvsystem.util.myOkhttpUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -153,24 +156,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getMethod() {
 
-        String url = "http://www.zhiyun-tech.com/App/Rider-M/changelog-zh.txt";
-        url="http://172.20.157.126:8080/web/Android/AlertLog/UnreadCount?custId=df1e27ff-95e6-4549-952f-f95e74e9a11e";
+        String url = "http://www.391k.com/api/xapi.ashx/info.json?key=bd_hyrzjjfb4modhj&size=10&page=1";
+        url="http://m2m.tongwei.com/web/Android/AlertLog/UnreadCount?custId=df1e27ff-95e6-4549-952f-f95e74e9a11e";
         OkHttpUtils
                 .get()
                 .url(url)
-//                .id(100)
+                .id(100)
                 .build()
                 .execute(new MyStringCallback());
     }
 
     private void postStringMethod() {
 
-        String url = "http://172.20.157.126:8080/web/Android/AlertLog/ToViewed";
-        OkHttpUtils
-                .post()
-                .url(url)
-                .addParams("custId", "df1e27ff-95e6-4549-952f-f95e74e9a11e")
-                .build()
-                .execute(new MyStringCallback());
+        String url = "http://m2m.tongwei.com/web/Android/AlertLog/ToViewed";
+        Map<String, String> params = new HashMap<>();
+        params.put("custId", "df1e27ff-95e6-4549-952f-f95e74e9a11e");
+        myOkhttpUtil.postMethod(url, params, new MyStringCallback());
     }
 }

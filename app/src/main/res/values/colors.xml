@@ -7,4 +7,13 @@
     <color name="white">#FFFF</color>
     <color name="transparency">#0000</color>
     <color name="blue">#009eff</color>
+
+    <!--文字浅灰色-->
+    <color name="text_light_gray">#999999</color>
+    <!--文字灰色-->
+    <color name="text_gray">#666666</color>
+    <!--字体黑色-->
+    <color name="black">#282828</color>
+    <!--分割线颜色-->
+    <color name="line">#e2e2e2</color>
 </resources>

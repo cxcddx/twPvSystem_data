@@ -31,4 +31,6 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile files('libs/Amap_2DMap_V4.2.0_20170120.jar')
     compile project(path: ':dadachshundtablayout')
+    compile files('libs/android-async-http-1.4.4.jar')
+    compile files('libs/org.apache.http.legacy.jar')
 }
