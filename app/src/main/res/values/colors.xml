@@ -16,4 +16,8 @@
     <color name="black">#282828</color>
     <!--分割线颜色-->
     <color name="line">#e2e2e2</color>
+    <!--文字橘色-->
+    <color name="my_org">#ff9933</color>
+    <!--背景浅灰色-->
+    <color name="background">#F2F2F2</color>
 </resources>

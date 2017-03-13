@@ -1,19 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#009e9e"
-    android:orientation="vertical" >
-    
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView 
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
         android:text="节能减排"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textColor="#fff"
-        />
-    
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/iv_co2"
+                    style="@style/EnergyIv"
+                    android:src="@mipmap/operation_icon8" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title_co2"
+                style="@style/EnergyTitleText"
+                android:text="CO2减排量" />
+
+            <TextView
+                android:id="@+id/content_co2"
+                style="@style/EnergyContentText"
+                android:text="2.964 万t" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/iv_coal"
+                    style="@style/EnergyIv"
+                    android:src="@mipmap/water_quality_icon5" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title_coal"
+                style="@style/EnergyTitleText"
+                android:text="节约标准煤" />
+
+            <TextView
+                android:id="@+id/content_coal"
+                style="@style/EnergyContentText"
+                android:text="1.189 万t" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/iv_forest"
+                    style="@style/EnergyIv"
+                    android:src="@mipmap/equipment_icon6" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title_forest"
+                style="@style/EnergyTitleText"
+                android:text="减少森林砍伐" />
+
+            <TextView
+                android:id="@+id/content_forest"
+                style="@style/EnergyContentText"
+                android:text="1.115 万m³" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

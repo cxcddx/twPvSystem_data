@@ -3,6 +3,7 @@ package twpvsystem.tongwei.com.twpvsystem.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
@@ -21,164 +23,214 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 import twpvsystem.tongwei.com.twpvsystem.R;
 import twpvsystem.tongwei.com.twpvsystem.activity.ChartActivity;
+import twpvsystem.tongwei.com.twpvsystem.activity.MapActivity;
 
 public class ChartOneFragment extends Fragment {
 
-	private LineChartView chart;
-	private LineChartData data;
-	private int numberOfLines = 1;
-	private int maxNumberOfLines = 4;
-	private int numberOfPoints = 12;
-	float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
+    private LineChartView chart;
+    private LineChartData data;
+    private int numberOfLines = 1;
+    private int maxNumberOfLines = 4;
+    private int numberOfPoints = 12;
+    float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
 
-	private boolean hasAxes = true;
-	private boolean hasAxesNames = true;
-	private boolean hasLines = true;
-	private boolean hasPoints = true;
-	private ValueShape shape = ValueShape.CIRCLE;
-	private boolean isFilled = false;
-	private boolean hasLabels = false;
-	private boolean isCubic = false;
-	private boolean hasLabelForSelected = false;
-	private boolean pointsHaveDifferentColor;
-	@Override
-	public void onCreate(Bundle savedInstanceState) 
-	{
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
-		View v = inflater.inflate(R.layout.chart_one, container, false);
-		init(v);
-		return v;
-	}
+    private boolean hasAxes = true;
+    private boolean hasAxesNames = true;
+    private boolean hasLines = true;
+    private boolean hasPoints = true;
+    private ValueShape shape = ValueShape.CIRCLE;
+    private boolean isFilled = false;
+    private boolean hasLabels = false;
+    private boolean isCubic = false;
+    private boolean hasLabelForSelected = false;
+    private boolean pointsHaveDifferentColor;
 
-	private void init(View v) {
-		chart = (LineChartView) v.findViewById(R.id.chart);
-		chart.setOnValueTouchListener(new ValueTouchListener());
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-		// Generate some random values.
-		generateValues();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.chart_one, container, false);
+        init(v);
+        return v;
+    }
 
-		generateData();
+    private void init(View v) {
+        chart = (LineChartView) v.findViewById(R.id.chart);
+        chart.setOnValueTouchListener(new ValueTouchListener());
 
-		// Disable viewport recalculations, see toggleCubic() method for more info.
-		chart.setViewportCalculationEnabled(false);
+        // Generate some random values.
+        generateValues();
 
-		resetViewport();
-	}
+        generateData();
 
-	private void generateValues() {
-		for (int i = 0; i < maxNumberOfLines; ++i) {
-			for (int j = 0; j < numberOfPoints; ++j) {
-				randomNumbersTab[i][j] = (float) Math.random() * 100f;
-			}
-		}
-	}
+        // Disable viewport recalculations, see toggleCubic() method for more info.
+        chart.setViewportCalculationEnabled(false);
+        chart.setZoomType(ZoomType.HORIZONTAL);//缩放x轴
 
-	private void generateData() {
+        resetViewport();
+    }
 
-		List<Line> lines = new ArrayList<Line>();
-		for (int i = 0; i < numberOfLines; ++i) {
+    private void generateValues() {
+        for (int i = 0; i < maxNumberOfLines; ++i) {
+            for (int j = 0; j < numberOfPoints; ++j) {
+                randomNumbersTab[i][j] = (float) Math.random() * 100f;
+            }
+        }
+    }
 
-			List<PointValue> values = new ArrayList<PointValue>();
-			for (int j = 0; j < numberOfPoints; ++j) {
-				values.add(new PointValue(j, randomNumbersTab[i][j]));
-			}
+    private void generateData() {
 
-			Line line = new Line(values);
-			line.setColor(ChartUtils.COLORS[i]);
-			line.setShape(shape);
-			line.setCubic(isCubic);
-			line.setFilled(isFilled);
-			line.setHasLabels(hasLabels);
-			line.setHasLabelsOnlyForSelected(hasLabelForSelected);
-			line.setHasLines(hasLines);
-			line.setHasPoints(hasPoints);
-			if (pointsHaveDifferentColor){
-				line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
-			}
-			lines.add(line);
-		}
+        List<Line> lines = new ArrayList<Line>();
+        for (int i = 0; i < numberOfLines; ++i) {
 
-		data = new LineChartData(lines);
+            List<PointValue> values = new ArrayList<PointValue>();
+            for (int j = 0; j < numberOfPoints; ++j) {
+                values.add(new PointValue(j, randomNumbersTab[i][j]));
+            }
 
-		if (hasAxes) {
-			Axis axisX = new Axis();
-			Axis axisY = new Axis().setHasLines(true);
-			if (hasAxesNames) {
-				axisX.setName("Axis X");
-				axisY.setName("Axis Y");
-			}
-			data.setAxisXBottom(axisX);
-			data.setAxisYLeft(axisY);
-		} else {
-			data.setAxisXBottom(null);
-			data.setAxisYLeft(null);
-		}
+            Line line = new Line(values);
+            line.setColor(ChartUtils.COLORS[i]);
+            line.setShape(shape);
+            line.setCubic(isCubic);
+            line.setFilled(isFilled);
+            line.setHasLabels(hasLabels);
+            line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+            line.setHasLines(hasLines);
+            line.setHasPoints(hasPoints);
+            if (pointsHaveDifferentColor) {
+                line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
+            }
+            lines.add(line);
+        }
 
-		data.setBaseValue(Float.NEGATIVE_INFINITY);
-		chart.setLineChartData(data);
+        data = new LineChartData(lines);
 
-	}
+        if (hasAxes) {
+            Axis axisX = new Axis();
+            Axis axisY = new Axis().setHasLines(true);
+            if (hasAxesNames) {
+                axisX.setName("Axis X");
+                axisY.setName("Axis Y");
+            }
+            data.setAxisXBottom(axisX);
+            data.setAxisYLeft(axisY);
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
 
-	private void resetViewport() {
-		// Reset viewport height range to (0,100)
-		final Viewport v = new Viewport(chart.getMaximumViewport());
-		v.bottom = 0;
-		v.top = 100;
-		v.left = 0;
-		v.right = numberOfPoints - 1;
-		chart.setMaximumViewport(v);
-		chart.setCurrentViewport(v);
-	}
+        data.setBaseValue(Float.NEGATIVE_INFINITY);
+        chart.setLineChartData(data);
 
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-	}
-	
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-	}
-	
-	@Override
-	public void onStop() {
-		super.onStop();
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-	}
+        //与scrollview滑动冲突解决
+        chart.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int n = event.getPointerCount();
+                if (n == 1) {
+                    //允许ScrollView截断点击事件，ScrollView可滑动
+                    MapActivity.mScrollView.requestDisallowInterceptTouchEvent(false);
+                } else {
+//                不允许ScrollView截断点击事件，点击事件由子View处理
+                    MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
+                }
 
-	private class ValueTouchListener implements LineChartOnValueSelectListener {
 
-		@Override
-		public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-			Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
-		}
+//                float minMove = 5;         //最小滑动距离
+////                float minVelocity = 0;      //最小滑动速度
+//                float beginX = event.getX();
+//                float endX = event.getX();
+//                float beginY = event.getY();
+//                float endY = event.getY();
+//                int action = event.getAction();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        beginX = event.getRawX();
+//                        beginY = event.getRawY();
+////                        MapActivity.mScrollView.requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+////                        MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        endX = event.getRawX();
+//                        endY = event.getRawY();
+//                        if(Math.abs(endX-beginX)>Math.abs(endY-beginY)&&Math.abs(endX-beginX)>minMove) {
+////                            不允许ScrollView截断点击事件，点击事件由子View处理
+//                            MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
+//                        } else {
+//                            //允许ScrollView截断点击事件，ScrollView可滑动
+//                            MapActivity.mScrollView.requestDisallowInterceptTouchEvent(false);
+//                        }
+//
+//                        break;
+//                }
 
-		@Override
-		public void onValueDeselected() {
-			// TODO Auto-generated method stub
 
-		}
+                return false;
+            }
+        });
 
-	}
-	
+    }
+
+    private void resetViewport() {
+        // Reset viewport height range to (0,100)
+        final Viewport v = new Viewport(chart.getMaximumViewport());
+        v.bottom = 0;
+        v.top = 100;
+        v.left = 0;
+        v.right = numberOfPoints - 1;
+        chart.setMaximumViewport(v);
+        chart.setCurrentViewport(v);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    private class ValueTouchListener implements LineChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
+            Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+
 }

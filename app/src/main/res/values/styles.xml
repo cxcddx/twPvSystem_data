@@ -4,7 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -19,6 +20,90 @@
 
     <style name="AlertDialogCustom" parent="@android:style/Theme.Holo.DialogWhenLarge">
         <item name="android:textSize">@dimen/text_size_one</item>
+    </style>
+
+    <!--<style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">-->
+        <!--<item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>-->
+        <!--<item name="android:textColor">#FF555555</item>-->
+        <!--<item name="android:textSize">@dimen/text_size_one</item>-->
+        <!--<item name="android:paddingLeft">8dp</item>-->
+        <!--<item name="android:paddingRight">8dp</item>-->
+        <!--<item name="android:fadingEdge">horizontal</item>-->
+        <!--<item name="android:fadingEdgeLength">8dp</item>-->
+    <!--</style>-->
+
+    <!--<style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">-->
+        <!--<item name="android:typeface">monospace</item>-->
+    <!--</style>-->
+
+    <!--<style name="CustomUnderlinePageIndicator">-->
+        <!--<item name="selectedColor">#FFCC0000</item>-->
+        <!--<item name="android:background">#FFCCCCCC</item>-->
+        <!--<item name="fadeLength">1000</item>-->
+        <!--<item name="fadeDelay">1000</item>-->
+    <!--</style>-->
+
+
+    <!--累计发电量栏图标样式-->
+    <style name="ElecIv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">#ffff</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <!--累计发电量栏标题文字样式-->
+    <style name="ElecTitleText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/text_size_one</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--累计发电量栏内容文字样式-->
+    <style name="ElecTitleContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/text_size_two</item>
+        <item name="android:textColor">@color/my_org</item>
+    </style>
+
+    <!--节能减排栏图标样式-->
+    <style name="EnergyIv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <!--节能减排栏一级文字样式-->
+    <style name="EnergyTitleText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:textSize">@dimen/text_size_one</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--节能减排栏二级文字样式-->
+    <style name="EnergyContentText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/text_size_two</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
+    <!--分割线样式-->
+    <style name="div">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:background">@color/background</item>
     </style>
 
 </resources>

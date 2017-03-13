@@ -2,18 +2,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9e9e00"
+    android:background="@color/white"
     android:orientation="vertical" >
     
 
-    <TextView 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="累计发电"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textColor="#fff"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                style="@style/ElecIv"
+                android:id="@+id/iv_elec_total"
+                android:src="@mipmap/water_quality_icon5"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/iv_elec_total"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+                <TextView
+                    android:id="@+id/title_total"
+                    style="@style/ElecTitleText"
+                    android:text="总发电量"/>
+                <TextView
+                    android:id="@+id/content_total"
+                    style="@style/ElecTitleContent"
+                    android:text="1,464.55 万kW.h"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                style="@style/ElecIv"
+                android:id="@+id/iv_elec_today"
+                android:src="@mipmap/equipment_icon6"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/iv_elec_today"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+                <TextView
+                    android:id="@+id/title_today"
+                    style="@style/ElecTitleText"
+                    android:text="当日发电量"/>
+                <TextView
+                    android:id="@+id/content_today"
+                    style="@style/ElecTitleContent"
+                    android:text="2.40 万kW.h"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/ElecIv"
+                android:id="@+id/iv_elec_install"
+                android:src="@mipmap/threshold_icon10"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/iv_elec_install"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+            <TextView
+                android:id="@+id/title_install"
+                style="@style/ElecTitleText"
+                android:text="装机容量"/>
+            <TextView
+                android:id="@+id/content_install"
+                style="@style/ElecTitleContent"
+                android:text="21.40 万kW.h"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                style="@style/ElecIv"
+                android:id="@+id/iv_elec_earnings"
+                android:src="@mipmap/operation_icon8"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/iv_elec_earnings"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+                <TextView
+                    android:id="@+id/title_earnings"
+                    style="@style/ElecTitleText"
+                    android:text="收益"/>
+                <TextView
+                    android:id="@+id/content_earnings"
+                    style="@style/ElecTitleContent"
+                    android:text="1,464.55 元"/>
+            </LinearLayout>
+            </RelativeLayout>
+    </LinearLayout>
     
 </LinearLayout>
