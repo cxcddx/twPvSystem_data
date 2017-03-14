@@ -139,38 +139,6 @@ public class ChartOneFragment extends Fragment {
                     MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
                 }
 
-
-//                float minMove = 5;         //最小滑动距离
-////                float minVelocity = 0;      //最小滑动速度
-//                float beginX = event.getX();
-//                float endX = event.getX();
-//                float beginY = event.getY();
-//                float endY = event.getY();
-//                int action = event.getAction();
-//                switch (action) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        beginX = event.getRawX();
-//                        beginY = event.getRawY();
-////                        MapActivity.mScrollView.requestDisallowInterceptTouchEvent(false);
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-////                        MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        endX = event.getRawX();
-//                        endY = event.getRawY();
-//                        if(Math.abs(endX-beginX)>Math.abs(endY-beginY)&&Math.abs(endX-beginX)>minMove) {
-////                            不允许ScrollView截断点击事件，点击事件由子View处理
-//                            MapActivity.mScrollView.requestDisallowInterceptTouchEvent(true);
-//                        } else {
-//                            //允许ScrollView截断点击事件，ScrollView可滑动
-//                            MapActivity.mScrollView.requestDisallowInterceptTouchEvent(false);
-//                        }
-//
-//                        break;
-//                }
-
-
                 return false;
             }
         });
@@ -186,36 +154,6 @@ public class ChartOneFragment extends Fragment {
         v.right = numberOfPoints - 1;
         chart.setMaximumViewport(v);
         chart.setCurrentViewport(v);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {
