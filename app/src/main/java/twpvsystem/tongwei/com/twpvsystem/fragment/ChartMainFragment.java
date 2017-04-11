@@ -6,16 +6,29 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import okhttp3.Call;
 import twpvsystem.tongwei.com.twpvsystem.R;
+import twpvsystem.tongwei.com.twpvsystem.bean.ChartData;
+import twpvsystem.tongwei.com.twpvsystem.util.Constants;
+import twpvsystem.tongwei.com.twpvsystem.util.MessageUtils;
+import twpvsystem.tongwei.com.twpvsystem.util.Util;
+import twpvsystem.tongwei.com.twpvsystem.util.myOkhttpUtil;
 
 
 public class ChartMainFragment extends Fragment implements View.OnClickListener {
@@ -36,15 +49,22 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
     ChartOneFragment oneFragment;
     ChartTwoFragment twoFragment;
     ChartThreeFragment threeFragment;
+    private static final String TAG = "ChartMainFragment";
 
     //当前选中的项
     int currenttab = -1;
+    private Long id;
+    private Gson gson;
+    public ChartData chart_data;
+    private boolean isFirst;
+    private MyFrageStatePagerAdapter m_adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart_main, null, false);
         initView(view);
-        initFragment();
+        initData();
+//        initFragment();
         return view;
 
     }
@@ -60,6 +80,58 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
         btn_three.setOnClickListener(this);
     }
 
+    private void initData() {
+        isFirst = true;
+        id = (Long) getArguments().get(Constants.UserId);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                getDataPost();
+            }
+        }, 1000, Constants.FRESH_TIME);
+
+
+    }
+
+     /*
+    根据id获取电量等数据
+     */
+
+    private void getDataPost() {
+        gson = new Gson();
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", "" + id);
+        params.put("date", Util.today());
+        myOkhttpUtil.postMethod(Constants.URL_CHART, params, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                MessageUtils.ShowToast(getActivity(), "总数据获取失败");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (response != null) {
+                    Log.i(TAG, "onResponse: "+ response);
+                    chart_data = gson.fromJson(response, ChartData.class);
+                    if(chart_data.getCode() == 200) {
+                        if(isFirst) {
+                            isFirst = false;
+                            initFragment();
+                        } else {
+                            freshFragment();
+                        }
+                    }
+                }
+
+            }
+        });
+    }
+
+    public ChartData getChartData() {
+        ChartData a = this.chart_data;
+        return a;
+    }
+
     private void initFragment() {
 
         fragmentList = new ArrayList<Fragment>();
@@ -70,9 +142,15 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
         fragmentList.add(oneFragment);
         fragmentList.add(twoFragment);
         fragmentList.add(threeFragment);
+        m_adapter = new MyFrageStatePagerAdapter(getChildFragmentManager());
 
-        mViewPager.setAdapter(new MyFrageStatePagerAdapter(getChildFragmentManager()));
+        mViewPager.setAdapter(m_adapter);
         btn_one.setBackgroundColor(Color.parseColor("#F522DC"));
+    }
+
+    private void freshFragment() {
+       m_adapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -87,6 +165,7 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
 
         @Override
         public Fragment getItem(int position) {
+
             return fragmentList.get(position);
         }
 

@@ -1,40 +1,28 @@
 package twpvsystem.tongwei.com.twpvsystem.fragment;
 
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.Interpolator;
-import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.Projection;
-import com.amap.api.maps2d.UiSettings;
-import com.amap.api.maps2d.model.BitmapDescriptor;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
-import com.amap.api.maps2d.model.MarkerOptions;
-import com.amap.api.maps2d.model.Text;
-import com.amap.api.maps2d.model.TextOptions;
 
-import java.util.ArrayList;
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import twpvsystem.tongwei.com.twpvsystem.R;
+import twpvsystem.tongwei.com.twpvsystem.activity.CustomerActivity;
 import twpvsystem.tongwei.com.twpvsystem.activity.MapActivity;
+import twpvsystem.tongwei.com.twpvsystem.bean.InfoBean;
+import twpvsystem.tongwei.com.twpvsystem.bean.UserInf;
 import twpvsystem.tongwei.com.twpvsystem.util.Constants;
 import twpvsystem.tongwei.com.twpvsystem.util.MapUtil;
 
@@ -103,8 +91,27 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
      * 在地图上添加marker
      */
     private void addMarkersToMap() {
-        MapUtil.addMarkersToMap(aMap, l_cd, "成都");
-        MapUtil.addMarkersToMap(aMap, l_bj, "北京");
+//        MapUtil.addMarkersToMap(aMap, l_cd, "成都");
+//        MapUtil.addMarkersToMap(aMap, l_bj, "北京");
+//        News news = DataSupport.find(News.class, 1, true);
+//        List<Comment> commentList = news.getCommentList();
+//        List<UserInf> uList = DataSupport.findAll(UserInf.class);
+//        for(int i = 0; i<uList.size();i++) {
+//            MapUtil.addMarkersToMap(aMap, new LatLng(uList.get(i).getInfo().getLatitude(), uList.get(i).getInfo().getLongitude()), ""+uList.get(i).getUserId());
+//        }
+
+        List<UserInf> uList = DataSupport.findAll(UserInf.class);
+        for(int i = 0; i<uList.size();i++) {
+            List<UserInf> List = DataSupport.findAll(UserInf.class, true);
+            InfoBean infList = List.get(i).getInfo();
+            if (!(infList == null)) {
+                double Latitude = infList.getLatitude();
+                double getLongitude = infList.getLongitude();
+                MapUtil.addMarkersToMap(aMap, new LatLng(Latitude, getLongitude), uList.get(i).getUserId());
+            }
+        }
+
+
     }
 
     /**
@@ -120,7 +127,16 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
      */
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Toast.makeText(getActivity(), "你点击的是" + marker.getTitle(), Toast.LENGTH_SHORT).show();
+        String choiceName = "";
+//        Toast.makeText(getActivity(), "你点击的是" + marker.getTitle()+"id=" + marker.getId(), Toast.LENGTH_SHORT).show();
+        MapActivity.m_sharedHelper.putValue(Constants.ChoiceId, Long.parseLong(marker.getTitle()));
+        List<UserInf> userinf = DataSupport.where("userId = ?",marker.getTitle()).find(UserInf.class, true);
+        if(userinf.size()>0) {
+            choiceName = userinf.get(0).getInfo().getPowerName();
+            MapActivity.m_sharedHelper.putValue(Constants.CommonUser, choiceName);
+        }
+        Intent intent = new Intent(getActivity(), CustomerActivity.class);
+        getActivity().startActivity(intent);
         return false;
     }
 
@@ -136,7 +152,7 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
     public View getInfoContents(Marker marker) {
 
         View infoContent = getActivity().getLayoutInflater().inflate(
-                R.layout.content_map, null);
+                null, null);
         return infoContent;
     }
 

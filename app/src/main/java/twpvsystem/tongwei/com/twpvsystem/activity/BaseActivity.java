@@ -5,21 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import twpvsystem.tongwei.com.twpvsystem.R;
 import twpvsystem.tongwei.com.twpvsystem.util.Constants;
@@ -29,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private static final String TAG = BaseActivity.class.getSimpleName();
     private TextView mToolbarTitle;
     public Toolbar mToolbar;
-    public SharedHelper m_sharedHelper;
+    public static SharedHelper m_sharedHelper;
 
     protected void initBaseActivity() {
         m_sharedHelper = new SharedHelper(this, Constants.Shared_NAME);
@@ -60,6 +56,22 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
+        //每隔一段时间刷新页面
+        fresh();
+
+
+    }
+
+    private void fresh() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                refreshAction();
+            }
+        }, 1000, Constants.FRESH_TIME);
+    }
+
+    protected void refreshAction() {
     }
 
     @Override
@@ -114,7 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                    onBackPressed();
             }
         });
     }
@@ -193,15 +205,66 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 (Bitmap) null));
         popWind.setOutsideTouchable(true); //点击外部关闭。
         popWind.setAnimationStyle(android.R.style.Animation_Dialog);  //设置一个动画。
+
+        /*
+        设置popwind弹出后背景模糊
+         */
+
+
+////        /在PopupWindow里面就加上下面代码，让键盘弹出时，不会挡住pop窗口。
+//        popWind.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        popWind.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+////点击空白处时，隐藏掉pop窗口
+//        popWind.setFocusable(true);
+//        popWind.setBackgroundDrawable(new BitmapDrawable());
+//        backgroundAlpha(0.5f);
+//
+//        //添加pop窗口关闭事件
+//        popWind.setOnDismissListener(new poponDismissListener());
+
+
+
         //设置Gravity，让它显示在右上角。
 //        popWind.showAtLocation(parentView, Gravity.RIGHT | Gravity.TOP,
 //                yOffset, xOffset);
-        //设置Gravity，让它显示在右上角。
+        //设置Gravity，让它显示在左上角。
         popWind.showAtLocation(parentView, Gravity.LEFT|Gravity.TOP,
                 yOffset, xOffset);
 
 
     }
+
+
+//    /**
+//     * 添加新笔记时弹出的popWin关闭的事件，主要是为了将背景透明度改回来
+//     * @author cg
+//     *
+//     */
+//    class poponDismissListener implements PopupWindow.OnDismissListener{
+//
+//        @Override
+//        public void onDismiss() {
+//            // TODO Auto-generated method stub
+//            //Log.v("List_noteTypeActivity:", "我是关闭事件");
+//            backgroundAlpha(1f);
+//        }
+//
+//    }
+//
+//
+//
+//    /**
+//     * 设置添加屏幕的背景透明度
+//     * @param bgAlpha
+//     */
+//    public void backgroundAlpha(float bgAlpha)
+//    {
+//        WindowManager.LayoutParams lp = getWindow().getAttributes();
+//        lp.alpha = bgAlpha; //0.0-1.0
+//        getWindow().setAttributes(lp);
+//    }
+
+
     public int Dp2Px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
@@ -209,11 +272,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     private void initDrop(View popView) {
         LinearLayout drop_one = (LinearLayout) popView.findViewById(R.id.drop_one);
-        LinearLayout drop_two = (LinearLayout) popView.findViewById(R.id.drop_two);
-        LinearLayout drop_three = (LinearLayout) popView.findViewById(R.id.drop_three);
+        LinearLayout drop_cpwd = (LinearLayout) popView.findViewById(R.id.drop_cpwd);
+        LinearLayout drop_about = (LinearLayout) popView.findViewById(R.id.drop_about);
         drop_one.setOnClickListener(this);
-        drop_two.setOnClickListener(this);
-        drop_three.setOnClickListener(this);
+        drop_cpwd.setOnClickListener(this);
+        drop_about.setOnClickListener(this);
 
     }
 
@@ -222,4 +285,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
 
     }
+
+
+
 }

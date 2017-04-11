@@ -5,15 +5,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import twpvsystem.tongwei.com.twpvsystem.R;
+import twpvsystem.tongwei.com.twpvsystem.activity.MapActivity;
 
 public class ElecFragment extends Fragment {
+
+	private TextView content_total, content_today, content_install, content_earnings;
+
+	private static ElecFragment fragment;
+	public static ElecFragment newInstance() {
+		if (fragment == null) {
+			fragment = new ElecFragment();
+		}
+		return fragment;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
-//		System.out.println("ChartOneFragment  onCreate");
+//		System.out.println("ChartOneFragment_old  onCreate");
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -21,48 +33,67 @@ public class ElecFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-//		System.out.println("ChartOneFragment  onCreateView");
-		return inflater.inflate(R.layout.fragment_elec, container, false);
+		View v = inflater.inflate(R.layout.fragment_elec, container, false);
+		initView(v);
+		notifyUpdateElecFragmentData();
+		return v;
 	}
+
+	private void initView(View v) {
+		content_total = (TextView) v.findViewById(R.id.content_total);
+		content_today = (TextView) v.findViewById(R.id.content_today);
+		content_install = (TextView) v.findViewById(R.id.content_install);
+		content_earnings = (TextView) v.findViewById(R.id.content_earnings);
+//		notifyUpdateElecFragmentData();
+	}
+
+	public void notifyUpdateElecFragmentData() {
+		content_total.setText(MapActivity.totalPower);
+		content_today.setText(MapActivity.dailyPower);
+		content_install.setText(MapActivity.installedCapacity);
+		content_earnings.setText(MapActivity.earn);
+
+	}
+
 	
 	@Override
 	public void onPause() {
-//		System.out.println("ChartOneFragment  onPause");
+//		System.out.println("ChartOneFragment_old  onPause");
 		// TODO Auto-generated method stub
 		super.onPause();
 	}
 	
 	@Override
 	public void onResume() {
-//		System.out.println("ChartOneFragment  onResume");
+//		System.out.println("ChartOneFragment_old  onResume");
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
 	
 	@Override
 	public void onDestroy() {
-//		System.out.println("ChartOneFragment  onDestroy");
+//		System.out.println("ChartOneFragment_old  onDestroy");
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 	
 	@Override
 	public void onDestroyView() {
-//		System.out.println("ChartOneFragment  onDestroyView");
+//		System.out.println("ChartOneFragment_old  onDestroyView");
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 	}
 	
 	@Override
 	public void onStop() {
-//		System.out.println("ChartOneFragment  onStop");
+//		System.out.println("ChartOneFragment_old  onStop");
 		// TODO Auto-generated method stub
 		super.onStop();
 	}
 	
 	@Override
 	public void onStart() {
-//		System.out.println("ChartOneFragment  onStart");
+//		System.out.println("ChartOneFragment_old  onStart");
 		// TODO Auto-generated method stub
 		super.onStart();
 	}

@@ -1,10 +1,10 @@
 package twpvsystem.tongwei.com.twpvsystem.application;
 
-import android.app.Application;
-
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
+
+import org.litepal.LitePalApplication;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 /**
  * Created by zhy on 15/8/25.
  */
-public class MyApplication extends Application
+public class MyApplication extends LitePalApplication
 {
     private String CER_12306 = "-----BEGIN CERTIFICATE-----\n" +
             "MIICmjCCAgOgAwIBAgIIbyZr5/jKH6QwDQYJKoZIhvcNAQEFBQAwRzELMAkGA1UEBhMCQ04xKTAn\n" +
