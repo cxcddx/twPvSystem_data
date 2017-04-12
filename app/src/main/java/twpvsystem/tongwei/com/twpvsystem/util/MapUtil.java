@@ -19,7 +19,7 @@ import twpvsystem.tongwei.com.twpvsystem.bean.UserInf;
  * Created by CX on 2017/2/17.
  */
 public class MapUtil {
-    public static void addMarkersToMap(AMap aMap, LatLng latlng, int id) {
+    public static void addMarkersToMap(AMap aMap, LatLng latlng, int id, boolean isShowtext) {
         String title = "";
 
         List<UserInf> userinf = DataSupport.where("userId = ?","" +id).find(UserInf.class, true);
@@ -31,9 +31,10 @@ public class MapUtil {
 
         aMap.addMarker(new MarkerOptions().position(latlng).title(""+id).icon(BitmapDescriptorFactory
                 .fromResource(R.drawable.blu_circle)));
-
-        TextOptions textOptions = new TextOptions().position(latlng).text(title).backgroundColor(Color.TRANSPARENT).fontSize(20).fontColor(Color.BLUE);
-        aMap.addText(textOptions);
+        if(isShowtext) {
+            TextOptions textOptions = new TextOptions().position(latlng).text(title).backgroundColor(Color.TRANSPARENT).fontSize(20).fontColor(Color.BLUE);
+            aMap.addText(textOptions);
+        }
 
     }
 }

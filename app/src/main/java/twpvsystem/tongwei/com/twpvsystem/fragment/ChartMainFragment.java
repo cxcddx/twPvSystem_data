@@ -88,7 +88,7 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
             public void run() {
                 getDataPost();
             }
-        }, 1000, Constants.FRESH_TIME);
+        }, 0, Constants.FRESH_TIME);
 
 
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
 
@@ -32,6 +33,7 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
     private MapView mapView;
     private LatLng l_cd = new LatLng(30.67, 104.06);
     private LatLng l_bj = new LatLng(39.9, 116.3);
+    private boolean isShowText;//判断地图当前是否已显示标记点名称
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,17 +82,48 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
     }
 
     private void setUpMap() {
+        isShowText = false;
         aMap.setOnMapLoadedListener(this);// 设置amap加载成功事件监听器
         aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
         aMap.setInfoWindowAdapter(this);// 设置自定义InfoWindow样式
         aMap.setOnMapTouchListener(this);//设置点击监听，解决与scrollview滑动冲突
-        addMarkersToMap();// 往地图上添加marker
+        addMarkersToMap(false);// 往地图上添加marker
+
+        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                if(!isShowText&&aMap.getCameraPosition().zoom > 6) {
+                    isShowText = true;
+                    freshMarkersToMap(true);
+                }
+                if(isShowText&&aMap.getCameraPosition().zoom<=6) {
+                    isShowText = false;
+                    freshMarkersToMap(false);
+                }
+
+            }
+
+            @Override
+            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+
+            }
+        });
+
     }
+
+    /*
+     *当地图缩放到一定级别后，显示点名称
+     */
+    private void freshMarkersToMap(boolean isShowText) {
+        aMap.clear();
+        addMarkersToMap(isShowText);
+    }
+
 
     /**
      * 在地图上添加marker
      */
-    private void addMarkersToMap() {
+    private void addMarkersToMap(boolean isShowText) {
 //        MapUtil.addMarkersToMap(aMap, l_cd, "成都");
 //        MapUtil.addMarkersToMap(aMap, l_bj, "北京");
 //        News news = DataSupport.find(News.class, 1, true);
@@ -107,7 +140,7 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
             if (!(infList == null)) {
                 double Latitude = infList.getLatitude();
                 double getLongitude = infList.getLongitude();
-                MapUtil.addMarkersToMap(aMap, new LatLng(Latitude, getLongitude), uList.get(i).getUserId());
+                MapUtil.addMarkersToMap(aMap, new LatLng(Latitude, getLongitude), uList.get(i).getUserId(), isShowText);
             }
         }
 

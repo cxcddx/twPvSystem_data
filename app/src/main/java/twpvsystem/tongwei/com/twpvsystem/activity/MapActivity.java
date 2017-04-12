@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ import twpvsystem.tongwei.com.twpvsystem.util.myOkhttpUtil;
 //public class MapActivity extends AppCompatActivity implements View.OnClickListener, AMap.OnMarkerDragListener, AMap.OnMapLoadedListener, AMap.OnMarkerClickListener, AMap.OnInfoWindowClickListener, AMap.InfoWindowAdapter, AMap.OnMapTouchListener {
 public class MapActivity extends BaseActivity implements View.OnClickListener {
     public static ScrollView mScrollView;
+    private RelativeLayout nodata;
 
     private Fragment fragment_chart, fragment_energy, fragment_elec, fragment_map;
     private static final String TAG = "MapActivity";
@@ -105,6 +107,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
      */
     private void init() {
         isFirst = true;
+        nodata = (RelativeLayout) this.findViewById(R.id.nodata);
         mScrollView = (ScrollView) findViewById(R.id.view_content);
 //        //设置地图栏fragment，当为单个用户登入时，不显示该栏
         setMapDefaultFragment();
@@ -136,16 +139,17 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
                 if (!(response == null || response.length() <= 0)) {
                     TotalData total = gson.fromJson(response, TotalData.class);
                     if (total.getCode() == 200) {
-                    MapActivity.totalPower = total.getData().getTotalPower();
-                    MapActivity.dailyPower = total.getData().getDailyPower();
-                    MapActivity.installedCapacity = total.getData().getInstalledCapacity();
-                    MapActivity.earn = total.getData().getEarn();
-                    MapActivity.reduce = total.getData().getReduce();
-                    MapActivity.coalSaving = total.getData().getCoalSaving();
-                    MapActivity.reduceDeforestation = total.getData().getReduceDeforestation();
+                        nodata.setVisibility(View.GONE);
+                        MapActivity.totalPower = total.getData().getTotalPower();
+                        MapActivity.dailyPower = total.getData().getDailyPower();
+                        MapActivity.installedCapacity = total.getData().getInstalledCapacity();
+                        MapActivity.earn = total.getData().getEarn();
+                        MapActivity.reduce = total.getData().getReduce();
+                        MapActivity.coalSaving = total.getData().getCoalSaving();
+                        MapActivity.reduceDeforestation = total.getData().getReduceDeforestation();
 
 
-                        if(isFirst) {
+                        if (isFirst) {
                             isFirst = false;
                             //设置电量fragment
                             setElecDefaultFragment();
@@ -153,13 +157,15 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
                             setChartDefaultFragment();
                             //设置节能减排fragment
                             setEnergyDefaultFragment();
-                        }else {
+                        } else {
                             //设置电量fragment
                             setElecDefaultFragment();
                             //设置节能减排fragment
                             setEnergyDefaultFragment();
                         }
-                }
+                    } else {
+                        nodata.setVisibility(View.VISIBLE);
+                    }
                 }
 
             }

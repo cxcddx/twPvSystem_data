@@ -68,7 +68,7 @@ public class ChartThreeFragment extends Fragment {
 
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "时的值为:" + value.getValue());
+            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "月的值为:" + value.getValue());
         }
 
         @Override
