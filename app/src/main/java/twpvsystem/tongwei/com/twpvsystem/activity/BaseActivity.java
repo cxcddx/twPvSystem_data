@@ -271,13 +271,15 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initDrop(View popView) {
-        LinearLayout drop_one = (LinearLayout) popView.findViewById(R.id.drop_one);
+        LinearLayout drop_switch = (LinearLayout) popView.findViewById(R.id.drop_switch);
         LinearLayout drop_cpwd = (LinearLayout) popView.findViewById(R.id.drop_cpwd);
         LinearLayout drop_about = (LinearLayout) popView.findViewById(R.id.drop_about);
-        drop_one.setOnClickListener(this);
+        LinearLayout drop_quit = (LinearLayout) popView.findViewById(R.id.drop_quit);
+
+        drop_switch.setOnClickListener(this);
         drop_cpwd.setOnClickListener(this);
         drop_about.setOnClickListener(this);
-
+        drop_quit.setOnClickListener(this);
     }
 
 

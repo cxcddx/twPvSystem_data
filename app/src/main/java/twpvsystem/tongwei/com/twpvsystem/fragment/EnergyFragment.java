@@ -39,9 +39,9 @@ public class EnergyFragment extends Fragment {
 	}
 
 	public void notifyUpdateEnergyFragmentData() {
-		content_co2.setText(MapActivity.reduce);
-		content_coal.setText(MapActivity.coalSaving);
-		content_forest.setText(MapActivity.reduceDeforestation);
+		content_co2.setText(MapActivity.reduce + " " + MapActivity.reduceUnit);
+		content_coal.setText(MapActivity.coalSaving+ " " + MapActivity.coalSavingUnit);
+		content_forest.setText(MapActivity.reduceDeforestation+ " " + MapActivity.reduceDeforestationUnit);
 
 	}
 	

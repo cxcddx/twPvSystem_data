@@ -13,6 +13,7 @@ import twpvsystem.tongwei.com.twpvsystem.activity.MapActivity;
 public class ElecFragment extends Fragment {
 
 	private TextView content_total, content_today, content_install, content_earnings;
+	private TextView title_total, title_today, title_install, title_earnings;
 
 	private static ElecFragment fragment;
 	public static ElecFragment newInstance() {
@@ -44,6 +45,11 @@ public class ElecFragment extends Fragment {
 		content_today = (TextView) v.findViewById(R.id.content_today);
 		content_install = (TextView) v.findViewById(R.id.content_install);
 		content_earnings = (TextView) v.findViewById(R.id.content_earnings);
+
+		title_total = (TextView) v.findViewById(R.id.title_total);
+		title_today = (TextView) v.findViewById(R.id.title_today);
+		title_install = (TextView) v.findViewById(R.id.title_install);
+		title_earnings = (TextView) v.findViewById(R.id.title_earnings);
 //		notifyUpdateElecFragmentData();
 	}
 
@@ -52,6 +58,11 @@ public class ElecFragment extends Fragment {
 		content_today.setText(MapActivity.dailyPower);
 		content_install.setText(MapActivity.installedCapacity);
 		content_earnings.setText(MapActivity.earn);
+
+		title_total.setText("总发电量("+MapActivity.totalPowerUnit+")");
+		title_today.setText("当日发电量("+MapActivity.dailyPowerUnit+")");
+		title_install.setText("装机容量("+MapActivity.installedCapacityUnit+")");
+		title_earnings.setText("收益("+MapActivity.earnUnit+")");
 
 	}
 

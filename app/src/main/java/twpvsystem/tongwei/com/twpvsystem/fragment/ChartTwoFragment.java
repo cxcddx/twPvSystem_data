@@ -27,6 +27,8 @@ public class ChartTwoFragment extends Fragment {
     private List<Float> data;
     private TextView unit;
 
+    private List<ChartData.DataBean.MonthlyPowerBean> dayList;
+
     public ChartTwoFragment() {
     }
 
@@ -52,7 +54,7 @@ public class ChartTwoFragment extends Fragment {
         ChartMainFragment a = (ChartMainFragment) getParentFragment();
         ChartData chart_data = a.getChartData();
 
-        List<ChartData.DataBean.MonthlyPowerBean> dayList = chart_data.getData().getMonthlyPower();
+        dayList = chart_data.getData().getMonthlyPower();
         date = new ArrayList<String>();
         data = new ArrayList<Float>();
         for(int i =0; i<dayList.size()-1; i++) {
@@ -68,7 +70,7 @@ public class ChartTwoFragment extends Fragment {
 
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "日的值为:" + value.getValue());
+            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "日的值为:" + value.getValue() +dayList.get(dayList.size()-1).getUnit());
         }
 
         @Override

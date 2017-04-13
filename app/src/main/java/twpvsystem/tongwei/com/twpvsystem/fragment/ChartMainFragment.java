@@ -145,7 +145,8 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
         m_adapter = new MyFrageStatePagerAdapter(getChildFragmentManager());
 
         mViewPager.setAdapter(m_adapter);
-        btn_one.setBackgroundColor(Color.parseColor("#F522DC"));
+        btn_one.setBackgroundResource(R.drawable.tab_down);
+        btn_one.setTextColor(this.getResources().getColor(R.color.white));
     }
 
     private void freshFragment() {
@@ -219,19 +220,29 @@ public class ChartMainFragment extends Fragment implements View.OnClickListener 
     private void changeBtnStyle(int desTab) {
         switch (desTab) {
             case 0:
-                btn_one.setBackgroundColor(Color.parseColor("#F522DC"));
-                btn_two.setBackgroundColor(Color.parseColor("#009eff"));
-                btn_three.setBackgroundColor(Color.parseColor("#009eff"));
+//                btn_one.setBackgroundColor(Color.parseColor("#F522DC"));
+                btn_one.setBackgroundResource(R.drawable.tab_down);
+                btn_two.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_three.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_one.setTextColor(this.getResources().getColor(R.color.white));
+                btn_two.setTextColor(this.getResources().getColor(R.color.black));
+                btn_three.setTextColor(this.getResources().getColor(R.color.black));
                 break;
             case 1:
-                btn_one.setBackgroundColor(Color.parseColor("#009eff"));
-                btn_two.setBackgroundColor(Color.parseColor("#F522DC"));
-                btn_three.setBackgroundColor(Color.parseColor("#009eff"));
+                btn_one.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_two.setBackgroundResource(R.drawable.tab_down);
+                btn_three.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_one.setTextColor(this.getResources().getColor(R.color.black));
+                btn_two.setTextColor(this.getResources().getColor(R.color.white));
+                btn_three.setTextColor(this.getResources().getColor(R.color.black));
                 break;
             case 2:
-                btn_one.setBackgroundColor(Color.parseColor("#009eff"));
-                btn_two.setBackgroundColor(Color.parseColor("#009eff"));
-                btn_three.setBackgroundColor(Color.parseColor("#F522DC"));
+                btn_one.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_two.setBackgroundColor(Color.parseColor("#ffffff"));
+                btn_three.setBackgroundResource(R.drawable.tab_down);
+                btn_one.setTextColor(this.getResources().getColor(R.color.black));
+                btn_two.setTextColor(this.getResources().getColor(R.color.black));
+                btn_three.setTextColor(this.getResources().getColor(R.color.white));
                 break;
             default:
                 break;

@@ -20,7 +20,7 @@ import java.util.Map;
 
 import okhttp3.Call;
 import twpvsystem.tongwei.com.twpvsystem.R;
-import twpvsystem.tongwei.com.twpvsystem.bean.TotalData;
+import twpvsystem.tongwei.com.twpvsystem.bean.MainData;
 import twpvsystem.tongwei.com.twpvsystem.fragment.ChartMainFragment;
 import twpvsystem.tongwei.com.twpvsystem.fragment.ElecFragment;
 import twpvsystem.tongwei.com.twpvsystem.fragment.EnergyFragment;
@@ -38,6 +38,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "MapActivity";
     private Gson gson;
     public static String totalPower, dailyPower, installedCapacity, earn, reduce, coalSaving, reduceDeforestation;
+    public static String totalPowerUnit, dailyPowerUnit, installedCapacityUnit, earnUnit, reduceUnit, coalSavingUnit, reduceDeforestationUnit;
     private long userId;
     private boolean isFirst;
 
@@ -137,7 +138,8 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onResponse(String response, int id) {
                 if (!(response == null || response.length() <= 0)) {
-                    TotalData total = gson.fromJson(response, TotalData.class);
+//                    TotalData total = gson.fromJson(response, TotalData.class);
+                    MainData total = gson.fromJson(response, MainData.class);
                     if (total.getCode() == 200) {
                         nodata.setVisibility(View.GONE);
                         MapActivity.totalPower = total.getData().getTotalPower();
@@ -148,6 +150,13 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
                         MapActivity.coalSaving = total.getData().getCoalSaving();
                         MapActivity.reduceDeforestation = total.getData().getReduceDeforestation();
 
+                        MapActivity.totalPowerUnit = total.getData().getTotalPowerUnit();
+                        MapActivity.dailyPowerUnit = total.getData().getDailyPowerUnit();
+                        MapActivity.installedCapacityUnit = total.getData().getInstalledCapacityUnit();
+                        MapActivity.earnUnit = total.getData().getEarnUnit();
+                        MapActivity.reduceUnit = total.getData().getReduceUnit();
+                        MapActivity.coalSavingUnit = total.getData().getCoalSavingUnit();
+                        MapActivity.reduceDeforestationUnit = total.getData().getReduceDeforestationUnit();
 
                         if (isFirst) {
                             isFirst = false;
@@ -227,7 +236,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.drop_one:
+            case R.id.drop_switch:
                 Intent intent1 = new Intent(MapActivity.this, LoginActivity.class);
                 MapActivity.this.startActivity(intent1);
                 MapActivity.this.finish();
@@ -239,6 +248,9 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
             case R.id.drop_about:
                 Intent intent2 = new Intent(MapActivity.this, AboutActivity.class);
                 MapActivity.this.startActivity(intent2);
+                break;
+            case R.id.drop_quit:
+                MessageUtils.exitMessage(this);
                 break;
             default:
                 break;

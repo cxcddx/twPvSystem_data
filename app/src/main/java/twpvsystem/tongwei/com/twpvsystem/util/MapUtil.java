@@ -30,7 +30,7 @@ public class MapUtil {
 //        List<Comment> commentList = news.getCommentList();
 
         aMap.addMarker(new MarkerOptions().position(latlng).title(""+id).icon(BitmapDescriptorFactory
-                .fromResource(R.drawable.blu_circle)));
+                .fromResource(R.drawable.location_icon)));
         if(isShowtext) {
             TextOptions textOptions = new TextOptions().position(latlng).text(title).backgroundColor(Color.TRANSPARENT).fontSize(20).fontColor(Color.BLUE);
             aMap.addText(textOptions);

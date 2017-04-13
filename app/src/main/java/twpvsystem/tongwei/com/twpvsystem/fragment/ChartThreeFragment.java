@@ -27,6 +27,8 @@ public class ChartThreeFragment extends Fragment {
     private List<Float> data;
     private TextView unit;
 
+    private List<ChartData.DataBean.AnnualPowerBean> dayList;
+
     public ChartThreeFragment() {
     }
 
@@ -52,13 +54,20 @@ public class ChartThreeFragment extends Fragment {
         ChartMainFragment a = (ChartMainFragment) getParentFragment();
         ChartData chart_data = a.getChartData();
 
-        List<ChartData.DataBean.AnnualPowerBean> dayList = chart_data.getData().getAnnualPower();
+        dayList = chart_data.getData().getAnnualPower();
         date = new ArrayList<String>();
         data = new ArrayList<Float>();
         for(int i =0; i<dayList.size()-1; i++) {
             date.add(dayList.get(i).getMonthTime());
             data.add(Float.valueOf(dayList.get(i).getMonthPower()));
         }
+//        int showNum = 7;
+//        if(data.size()<showNum) {
+//            for(int i = 0;i<showNum-(dayList.size()-1);i++) {
+//                date.add("");
+//                data.add(-1f);
+//            }
+//        }
         ColumnChartUtil.generateColumnData(date, data, chartBottom);
         unit.setText("单位(" + dayList.get(dayList.size()-1).getUnit()+ ")");
 
@@ -68,7 +77,7 @@ public class ChartThreeFragment extends Fragment {
 
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "月的值为:" + value.getValue());
+            MessageUtils.ShowToast(getActivity(), date.get(columnIndex) + "月的值为:" + value.getValue() +dayList.get(dayList.size()-1).getUnit());
         }
 
         @Override
