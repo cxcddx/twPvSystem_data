@@ -140,7 +140,7 @@ public class MapFragment extends Fragment implements AMap.OnMapLoadedListener, A
             if (!(infList == null)) {
                 double Latitude = infList.getLatitude();
                 double getLongitude = infList.getLongitude();
-                MapUtil.addMarkersToMap(aMap, new LatLng(Latitude, getLongitude), uList.get(i).getUserId(), isShowText);
+                MapUtil.addMarkersToMap(getActivity(), aMap, new LatLng(Latitude, getLongitude), uList.get(i).getUserId(), isShowText);
             }
         }
 

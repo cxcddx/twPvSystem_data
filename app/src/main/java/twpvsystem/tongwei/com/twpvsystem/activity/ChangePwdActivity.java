@@ -1,10 +1,12 @@
 package twpvsystem.tongwei.com.twpvsystem.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 import okhttp3.Call;
 import twpvsystem.tongwei.com.twpvsystem.R;
+import twpvsystem.tongwei.com.twpvsystem.bean.ChangePwd;
 import twpvsystem.tongwei.com.twpvsystem.util.Constants;
 import twpvsystem.tongwei.com.twpvsystem.util.MessageUtils;
 import twpvsystem.tongwei.com.twpvsystem.util.myOkhttpUtil;
@@ -72,7 +75,8 @@ public class ChangePwdActivity extends BaseActivity{
         String savePwd = m_sharedHelper.getValue(Constants.UserPwd);
         String oldPwd = editOldPwd.getText().toString().trim();
         if (!savePwd.equals(oldPwd)) {
-            MessageUtils.ShowToast(this, "旧密码输入不正确!");
+//            MessageUtils.ShowToast(this, "旧密码输入不正确!");
+            MessageUtils.infoMessage(ChangePwdActivity.this, "旧密码输入不正确!");
             return;
         }
 
@@ -80,7 +84,8 @@ public class ChangePwdActivity extends BaseActivity{
         String newPwd2 = editNewPwd2.getText().toString().trim();
 
         if (!newPwd1.equals(newPwd2)) {
-            MessageUtils.ShowToast(this, "新密码和确认密码不一致!");
+//            MessageUtils.ShowToast(this, "新密码和确认密码不一致!");
+            MessageUtils.infoMessage(ChangePwdActivity.this, "新密码和确认密码不一致!");
             return;
         }
         Map<String, String> datas = new HashMap<String, String>();
@@ -95,8 +100,19 @@ public class ChangePwdActivity extends BaseActivity{
 
             @Override
             public void onResponse(String response, int id) {
+                if(!TextUtils.isEmpty(response)) {
+                    Gson gson = new Gson();
+                    ChangePwd cPwd = gson.fromJson(response, ChangePwd.class);
+                    if(cPwd.getCode() == 200) {
+                        MessageUtils.ShowToast(ChangePwdActivity.this, cPwd.getMsg());
+                        ChangePwdActivity.this.finish();
+                    } else if(cPwd.getCode() == 1003||cPwd.getCode() == 1007) {
+                        MessageUtils.infoMessage(ChangePwdActivity.this, cPwd.getMsg());
+                    } else {
+                        MessageUtils.infoMessage(ChangePwdActivity.this, "修改密码失败");
+                    }
+                }
 
-                MessageUtils.infoMessage(ChangePwdActivity.this, response);
             }
         });
     }

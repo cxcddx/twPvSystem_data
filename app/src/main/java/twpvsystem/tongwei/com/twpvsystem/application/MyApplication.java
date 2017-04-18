@@ -1,5 +1,7 @@
 package twpvsystem.tongwei.com.twpvsystem.application;
 
+import android.content.Context;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
@@ -32,12 +34,14 @@ public class MyApplication extends LitePalApplication
             "23XQ96HU8xfgSZMJS6U00WHAI7zp0q208RSUft9wDq9ee///VOhzR6Tebg9QfyPSohkBrhXQenvQ\n" +
             "og555S+C3eJAAVeNCTeMS3N/M5hzBRJAoffn3qoYdAO1Q8bTguOi+2849A==\n" +
             "-----END CERTIFICATE-----";
+    private static Context context;
 
 
     @Override
     public void onCreate()
     {
         super.onCreate();
+        context = getApplicationContext();
 
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
 
@@ -58,5 +62,9 @@ public class MyApplication extends LitePalApplication
                 .build();
         OkHttpUtils.initClient(okHttpClient);
 
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }

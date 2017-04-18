@@ -38,8 +38,10 @@ public class Constants {
 
     public static final String Common = "CommonUser";
     public static final String Admin = "Admin";
-    public static final String SaveUserCode = "SaveUserCode";// 是否保存用户名,默认保存
-    public static final String SavePassword = "SavePassword";// 是否保存密码,默认不保存
+    public static final String SaveUserCode = "SaveUserCode";// 是否保存用户名
+    public static final String SavePassword = "SavePassword";// 是否保存密码
+    public static final String Auto_Login = "Auto_Login";//是否自动登录
+    public static final String Switch_Customer = "Switch_Customer";//当前是否为切换用户
 
     /*
      *网络设置

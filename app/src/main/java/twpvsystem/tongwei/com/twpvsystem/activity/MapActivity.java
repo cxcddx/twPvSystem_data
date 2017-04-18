@@ -41,12 +41,13 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     public static String totalPowerUnit, dailyPowerUnit, installedCapacityUnit, earnUnit, reduceUnit, coalSavingUnit, reduceDeforestationUnit;
     private long userId;
     private boolean isFirst;
+    private boolean isFinishing;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getToolbarTitle().setText("分布式光伏系统");
+        getToolbarTitle().setText(R.string.app_name);
         initBaseActivity();
         init();
         getDataPost();
@@ -90,6 +91,18 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        isFinishing = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isFinishing = true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
         switch (item.getItemId()) {
@@ -109,7 +122,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     private void init() {
         isFirst = true;
         nodata = (RelativeLayout) this.findViewById(R.id.nodata);
-        mScrollView = (ScrollView) findViewById(R.id.view_content);
+        mScrollView = (ScrollView) this.findViewById(R.id.view_content);
 //        //设置地图栏fragment，当为单个用户登入时，不显示该栏
         setMapDefaultFragment();
         //设置表格fragment
@@ -158,19 +171,21 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
                         MapActivity.coalSavingUnit = total.getData().getCoalSavingUnit();
                         MapActivity.reduceDeforestationUnit = total.getData().getReduceDeforestationUnit();
 
-                        if (isFirst) {
-                            isFirst = false;
-                            //设置电量fragment
-                            setElecDefaultFragment();
-                            //设置表格fragment
-                            setChartDefaultFragment();
-                            //设置节能减排fragment
-                            setEnergyDefaultFragment();
-                        } else {
-                            //设置电量fragment
-                            setElecDefaultFragment();
-                            //设置节能减排fragment
-                            setEnergyDefaultFragment();
+                        if(!isFinishing) {
+                            if (isFirst) {
+                                isFirst = false;
+                                //设置电量fragment
+                                setElecDefaultFragment();
+                                //设置表格fragment
+                                setChartDefaultFragment();
+                                //设置节能减排fragment
+                                setEnergyDefaultFragment();
+                            } else {
+                                //设置电量fragment
+                                setElecDefaultFragment();
+                                //设置节能减排fragment
+                                setEnergyDefaultFragment();
+                            }
                         }
                     } else {
                         nodata.setVisibility(View.VISIBLE);
@@ -188,7 +203,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
         FragmentTransaction transaction = fm.beginTransaction();
         fragment_map = new MapFragment();
         transaction.replace(R.id.fragment_map, fragment_map);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     //设置电量fragment
@@ -197,7 +212,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
         FragmentTransaction transaction = fm.beginTransaction();
         fragment_elec = new ElecFragment();
         transaction.replace(R.id.fragment_elec, fragment_elec);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     //设置表格栏fragment
@@ -209,7 +224,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
         bundle.putLong(Constants.UserId, userId);
         fragment_chart.setArguments(bundle);
         transaction.replace(R.id.fragment_chart, fragment_chart);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     //设置节能减排fragment
@@ -237,6 +252,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.drop_switch:
+                m_sharedHelper.putValue(Constants.Switch_Customer, true);
                 Intent intent1 = new Intent(MapActivity.this, LoginActivity.class);
                 MapActivity.this.startActivity(intent1);
                 MapActivity.this.finish();
