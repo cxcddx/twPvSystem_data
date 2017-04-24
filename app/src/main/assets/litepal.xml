@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="db_twPvSystem" ></dbname>
+
+    <version value="6" ></version>
+
+    <list>
+        <mapping class = "twpvsystem.tongwei.com.twpvsystem.bean.Elec"></mapping>
+        <mapping class = "twpvsystem.tongwei.com.twpvsystem.bean.UserList"></mapping>
+        <mapping class = "twpvsystem.tongwei.com.twpvsystem.bean.UserInf"></mapping>
+        <mapping class = "twpvsystem.tongwei.com.twpvsystem.bean.InfoBean"></mapping>
+    </list>
+</litepal>

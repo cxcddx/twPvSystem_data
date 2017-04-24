@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +20,8 @@
             <ImageView
                 style="@style/ElecIv"
                 android:id="@+id/iv_elec_total"
-                android:src="@mipmap/water_quality_icon5"/>
+                android:src="@mipmap/water_quality_icon5"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,12 +30,10 @@
                 android:layout_marginLeft="8dp">
                 <TextView
                     android:id="@+id/title_total"
-                    style="@style/ElecTitleText"
-                    android:text="总发电量"/>
+                    style="@style/ElecTitleText"/>
                 <TextView
                     android:id="@+id/content_total"
-                    style="@style/ElecTitleContent"
-                    android:text="1,464.55 万kW.h"/>
+                    style="@style/ElecTitleContent"/>
             </LinearLayout>
 
         </RelativeLayout>
@@ -43,7 +44,8 @@
             <ImageView
                 style="@style/ElecIv"
                 android:id="@+id/iv_elec_today"
-                android:src="@mipmap/equipment_icon6"/>
+                android:src="@mipmap/equipment_icon6"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -52,17 +54,16 @@
                 android:layout_marginLeft="8dp">
                 <TextView
                     android:id="@+id/title_today"
-                    style="@style/ElecTitleText"
-                    android:text="当日发电量"/>
+                    style="@style/ElecTitleText"/>
                 <TextView
                     android:id="@+id/content_today"
-                    style="@style/ElecTitleContent"
-                    android:text="2.40 万kW.h"/>
+                    style="@style/ElecTitleContent"/>
             </LinearLayout>
 
         </RelativeLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -77,7 +78,8 @@
             <ImageView
                 style="@style/ElecIv"
                 android:id="@+id/iv_elec_install"
-                android:src="@mipmap/threshold_icon10"/>
+                android:src="@mipmap/threshold_icon10"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -86,12 +88,10 @@
                 android:layout_marginLeft="8dp">
             <TextView
                 android:id="@+id/title_install"
-                style="@style/ElecTitleText"
-                android:text="装机容量"/>
+                style="@style/ElecTitleText"/>
             <TextView
                 android:id="@+id/content_install"
-                style="@style/ElecTitleContent"
-                android:text="21.40 万kW.h"/>
+                style="@style/ElecTitleContent"/>
             </LinearLayout>
 
         </RelativeLayout>
@@ -102,7 +102,12 @@
             <ImageView
                 style="@style/ElecIv"
                 android:id="@+id/iv_elec_earnings"
-                android:src="@mipmap/operation_icon8"/>
+                android:src="@mipmap/operation_icon8"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -111,14 +116,14 @@
                 android:layout_marginLeft="8dp">
                 <TextView
                     android:id="@+id/title_earnings"
-                    style="@style/ElecTitleText"
-                    android:text="收益"/>
+                    style="@style/ElecTitleText"/>
                 <TextView
                     android:id="@+id/content_earnings"
-                    style="@style/ElecTitleContent"
-                    android:text="1,464.55 元"/>
+                    style="@style/ElecTitleContent"/>
             </LinearLayout>
-            </RelativeLayout>
+
+
+        </RelativeLayout>
     </LinearLayout>
     
 </LinearLayout>

@@ -5,22 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        >
+    <include layout="@layout/toolbar_layout"></include>
 
-        <!--自定义控件-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="分布式光伏系统"
-            android:textSize="@dimen/text_size_title"
-            android:gravity="center"
-            android:textColor="@color/white"/>
-    </android.support.v7.widget.Toolbar>
+    <include
+        layout="@layout/view_nodata"
+        android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/view_content"
@@ -32,51 +21,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <FrameLayout
+                android:id="@+id/fragment_map"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/fragment_map"></FrameLayout>
+                android:layout_height="wrap_content"></FrameLayout>
 
             <!--累计发电量等-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:orientation="horizontal">
-                <fragment
-                    android:name="twpvsystem.tongwei.com.twpvsystem.fragment.ElecFragment"
+
+                <FrameLayout
+                    android:id="@+id/fragment_elec"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragment_elec"/>
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
-            <TextView
-                style="@style/div"/>
+            <TextView style="@style/div" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">=
+                android:layout_height="wrap_content">
+
                 <FrameLayout
+                    android:id="@+id/fragment_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragment_chart"></FrameLayout>
+                    android:layout_height="match_parent"></FrameLayout>
             </LinearLayout>
-            <TextView
-                style="@style/div"/>
+
+            <TextView style="@style/div" />
 
             <!--节能减排等内容-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <fragment
-                    android:name="twpvsystem.tongwei.com.twpvsystem.fragment.EnergyFragment"
+
+                <FrameLayout
+                    android:id="@+id/fragment_energy"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/fragment_energy"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>
 
 
-
     </ScrollView>
+
 
 </LinearLayout>

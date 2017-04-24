@@ -16,8 +16,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:orientation="horizontal">
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -33,7 +34,7 @@
                 <ImageView
                     android:id="@+id/iv_co2"
                     style="@style/EnergyIv"
-                    android:src="@mipmap/operation_icon8" />
+                    android:src="@drawable/carbon_dioxide_icon" />
             </RelativeLayout>
 
             <TextView
@@ -62,7 +63,7 @@
                 <ImageView
                     android:id="@+id/iv_coal"
                     style="@style/EnergyIv"
-                    android:src="@mipmap/water_quality_icon5" />
+                    android:src="@drawable/coal_icon" />
             </RelativeLayout>
 
             <TextView
@@ -90,7 +91,7 @@
                 <ImageView
                     android:id="@+id/iv_forest"
                     style="@style/EnergyIv"
-                    android:src="@mipmap/equipment_icon6" />
+                    android:src="@drawable/forest_icon" />
             </RelativeLayout>
 
             <TextView

@@ -3,14 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    <include
+        layout="@layout/view_nodata"
+        android:visibility="gone" />
 
 
-    <lecho.lib.hellocharts.view.LineChartView
+   <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/unit"
+    />
+
+    <lecho.lib.hellocharts.view.ColumnChartView
         android:id="@+id/chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        >
-    </lecho.lib.hellocharts.view.LineChartView>
-    
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp">
+    </lecho.lib.hellocharts.view.ColumnChartView>
+
 </LinearLayout>

@@ -3,10 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <!--actionbar背景色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <item name="colorPrimaryDark">@color/black</item>
+        <!--title背景色-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimarytransparency</item>-->
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppLoginTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!--actionbar背景色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--title背景色-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimarytransparency</item>-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,26 +36,16 @@
         <item name="android:textSize">@dimen/text_size_one</item>
     </style>
 
-    <!--<style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">-->
-        <!--<item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>-->
-        <!--<item name="android:textColor">#FF555555</item>-->
-        <!--<item name="android:textSize">@dimen/text_size_one</item>-->
-        <!--<item name="android:paddingLeft">8dp</item>-->
-        <!--<item name="android:paddingRight">8dp</item>-->
-        <!--<item name="android:fadingEdge">horizontal</item>-->
-        <!--<item name="android:fadingEdgeLength">8dp</item>-->
-    <!--</style>-->
 
-    <!--<style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">-->
-        <!--<item name="android:typeface">monospace</item>-->
-    <!--</style>-->
-
-    <!--<style name="CustomUnderlinePageIndicator">-->
-        <!--<item name="selectedColor">#FFCC0000</item>-->
-        <!--<item name="android:background">#FFCCCCCC</item>-->
-        <!--<item name="fadeLength">1000</item>-->
-        <!--<item name="fadeDelay">1000</item>-->
-    <!--</style>-->
+    <!--自定义dialog背景全透明无边框theme -->
+    <style name="MyDialog" parent="android:style/Theme.Dialog">
+        <!-- dialog样式 -->
+        <item name="android:windowIsFloating">true</item>    <!--是否浮在界面上-->
+        <item name="android:windowIsTranslucent">false</item> <!--是否半透明-->
+        <item name="android:windowNoTitle">false</item>       <!--是否有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item> <!--窗口背景色透明-->
+        <item name="android:backgroundDimEnabled">true</item> <!--背景是否模糊显示-->
+    </style>
 
 
     <!--累计发电量栏图标样式-->
@@ -59,7 +63,7 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/text_size_one</item>
-        <item name="android:gravity">bottom</item>
+        <item name="android:gravity">bottom|center_horizontal</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -68,8 +72,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">@dimen/text_size_two</item>
-        <item name="android:textColor">@color/my_org</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!--节能减排栏图标样式-->
@@ -83,7 +90,7 @@
     <style name="EnergyTitleText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">0.6</item>
         <item name="android:gravity">center_horizontal|bottom</item>
         <item name="android:textSize">@dimen/text_size_one</item>
         <item name="android:textColor">@color/black</item>
@@ -93,7 +100,7 @@
     <style name="EnergyContentText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">0.6</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/text_size_two</item>
         <item name="android:textColor">@color/text_gray</item>
@@ -104,6 +111,45 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">15dp</item>
         <item name="android:background">@color/background</item>
+    </style>
+
+    <!--密码框-->
+    <style name="PassWordText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:textSize">@dimen/text_size_one</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+    <!--分割线-->
+    <style name="MyLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+
+    <!--关于页面左侧字体-->
+    <style name="AboutLeftText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textSize">@dimen/text_size_one</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--关于页面右侧字体-->
+    <style name="AboutRightText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textSize">@dimen/text_size_one</item>
+        <item name="android:textColor">@color/text_light_gray</item>
     </style>
 
 </resources>

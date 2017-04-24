@@ -38,7 +38,7 @@ public class MapUtil {
 
         Bitmap bitmap = BitmapFactory
                 .decodeResource(context.getResources(),R.drawable.location_icon);
-        Bitmap bigBitMap = scaleBitmap(bitmap, 1.2f);
+        Bitmap bigBitMap = scaleBitmap(bitmap, 1.0f);
         aMap.addMarker(new MarkerOptions().position(latlng).title(""+id).icon(BitmapDescriptorFactory.
                 fromBitmap(bigBitMap)));
 

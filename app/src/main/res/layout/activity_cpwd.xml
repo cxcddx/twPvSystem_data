@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <include layout="@layout/toolbar_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/txtOldPsw"
+            style="@style/PassWordText"
+            android:hint="旧密码"/>
+        <TextView
+            style="@style/MyLine" />
+        <EditText
+            android:id="@+id/txtNewPsw1"
+            style="@style/PassWordText"
+            android:hint="新密码"/>
+        <TextView
+            style="@style/MyLine" />
+        <EditText
+            android:id="@+id/txtNewPsw2"
+            style="@style/PassWordText"
+            android:hint="确认密码"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
+
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn"
+            android:textSize="@dimen/text_size_title"
+            android:text="确认修改"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
+
+    </LinearLayout>
+
+
+</LinearLayout>

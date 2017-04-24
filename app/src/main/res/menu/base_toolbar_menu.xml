@@ -6,7 +6,8 @@
         android:id="@+id/action_search"
         android:icon="@mipmap/user_icon3"
         android:title="search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        />
 
     <!--<item-->
         <!--android:id="@+id/action_notification"-->

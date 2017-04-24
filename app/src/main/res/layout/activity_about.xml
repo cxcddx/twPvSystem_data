@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+    >
+    <include layout="@layout/toolbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/background"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/about_logo_icon"
+            android:scaleType="fitXY"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+            <TextView
+                style="@style/AboutLeftText"
+                android:text="版本"/>
+            <TextView
+                style="@style/AboutRightText"
+                android:id="@+id/txtVersion"/>
+
+        </RelativeLayout>
+
+        <TextView
+            style="@style/MyLine"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/AboutLeftText"
+                android:text="开发"/>
+            <TextView
+                style="@style/AboutRightText"
+                android:text="@string/company"/>
+        </RelativeLayout>
+        <TextView
+            style="@style/MyLine"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            >
+
+            <TextView
+                style="@style/AboutLeftText"
+                android:text="版权所有"/>
+            <TextView
+                style="@style/AboutRightText"
+                android:text="@string/parent_company"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@color/background"
+        android:gravity="center_horizontal"
+        >
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:text="@string/about_bottom"-->
+            <!--android:textColor="@color/mainpagerbtnnormal"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:textSize="@dimen/text_size_two"-->
+            <!--/>-->
+    </RelativeLayout>
+
+</LinearLayout>

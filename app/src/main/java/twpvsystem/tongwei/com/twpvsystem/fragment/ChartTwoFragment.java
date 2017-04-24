@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ChartTwoFragment extends Fragment {
     private  List<String> date;
     private List<Float> data;
     private TextView unit;
+    private RelativeLayout noData;
 
     private List<ChartData.DataBean.MonthlyPowerBean> dayList;
 
@@ -42,6 +44,7 @@ public class ChartTwoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.chart_two, container, false);
         unit = (TextView)rootView.findViewById(R.id.unit);
+        noData = (RelativeLayout) rootView.findViewById(R.id.nodata);
         chartBottom = (ColumnChartView) rootView.findViewById(R.id.chart);
         // Set value touch listener that will trigger changes for chartTop.
         chartBottom.setOnValueTouchListener(new ValueTouchListener());
@@ -61,8 +64,13 @@ public class ChartTwoFragment extends Fragment {
             date.add(dayList.get(i).getDayTime());
             data.add(Float.valueOf(dayList.get(i).getDayPower()));
         }
-        ColumnChartUtil.generateColumnData(date, data, chartBottom);
-        unit.setText("单位(" + dayList.get(dayList.size()-1).getUnit()+ ")");
+        if(date.size()<1) {
+            noData.setVisibility(View.VISIBLE);
+        } else {
+            noData.setVisibility(View.GONE);
+            ColumnChartUtil.generateColumnData(date, data, chartBottom);
+            unit.setText("单位(" + dayList.get(dayList.size() - 1).getUnit() + ")");
+        }
 
     }
 

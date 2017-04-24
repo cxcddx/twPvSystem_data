@@ -7,7 +7,7 @@ public class Constants {
     /*
      *接口地址
      */
-    public static final String SERVER_URL = "http://172.20.90.8:8080/TWwebFrame/mobile";// 域名解析
+    public static final String SERVER_URL = "http://172.20.90.8/TWwebFrame/mobile";// 域名解析
     //登录
     public static final String URL_Login = SERVER_URL + "/login/validate";
     //	检查版本更新
